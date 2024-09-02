@@ -1,0 +1,53 @@
+
+body{
+    background:black;
+}
+
+#Logo{
+    height: 100px;
+    width: 100px;
+}
+
+
+/* map 1 (map pour ajouter le marqueur */
+
+#map { 
+    height: 400px;
+    width: 500px;
+
+}
+
+/* image à localiser */
+
+#paysage{
+    height: 400px;
+    width: 500px;
+}
+
+#flex{
+    display: flex;
+    flex-direction: row;
+    flex:center;
+    justify-content: center;
+}
+
+/* boutton guess */
+
+#btnguess{
+    display: flex;
+    flex:center;
+    justify-content: center;
+}
+
+/* map 2 pour la correction après le guess */
+
+#map2 { 
+    height: 400px;
+    width: 800px;
+}
+
+#flex2{
+    display: flex;
+    flex:center;
+    justify-content: center;
+}

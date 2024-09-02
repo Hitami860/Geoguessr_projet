@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <title>GeoGuessr</title>
 </head>
+
 <body>
+
+    <header>
+        <img id="Logo" src="image/LocaliLogo.webp" alt="Logo DLL">
+    </header>
+
+    <section id="flex">
+        <div id="map"></div>
+        <img id="paysage" src="image/paysage.jpg" alt="">
+    </section>
+
+    <button id="btnguess" type="submit" name="guess">Guess</button>
+
+    <section id="flex2">
+
+        <div id="map2"></div>
+
+    </section>
+
 
     <script src="Script/script.js"></script>
     
+
 </body>
+
 </html>
