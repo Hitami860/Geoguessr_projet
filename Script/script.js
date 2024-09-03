@@ -5,7 +5,67 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map)
 
+let data = [
+    {
+        "image": ["image/autriche.avif"],
+        "lati": 47.556225,
+        "longi": 13.645990,
 
+
+    },
+    {
+        "image": ["image/chine.jpeg"],
+        "lati": 24.183438,
+        "longi": 102.230346,
+    
+    },
+    {
+        "image": ["image/copacabana.jpg"],
+        "lati": -22.980226,
+        "longi": -43.189026,        
+    },
+    {
+        "image": ["image/maldives.jpg"],
+        "lati": 4.333397,
+        "longi": 73.599140,
+    
+    },
+    {
+        "image": ["image/montreal.jpg"],
+        "lati": 45.553261,
+        "longi": -73.581531,
+    
+    },
+    {
+        "image": ["image/moscou.jpg"],
+        "lati": 55.758390,
+        "longi": 37.635335,
+    
+    },
+    {
+        "image": ["image/gerardmer.jpg"],
+        "lati": 48.070569,
+        "longi": 6.855323,
+    
+    },
+
+]
+
+function getRandomItem(arr) {
+
+    return randomIndex = Math.floor(Math.random() * data.length);
+
+}
+let result = getRandomItem(data);
+console.log(result )
+
+let image = document.getElementById('paysage');
+let imagee = document.createElement('img');
+
+imagee.style.height = "25rem";
+imagee.src = data[result]['image'];
+image.appendChild(imagee);
+console.log(imagee)
 
 // ajout marqueur (au clic)
 
@@ -35,9 +95,16 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map2)
 
-let vraiLocalisation = [48.070569, 6.855323];      // donne les valeurs de la vrai localisation
+let vraiLocalisation = []     // donne les valeurs de la vrai localisation ( on declare dabord un tableau vide)..
+vraiLocalisation.push(data[result]['lati']);  // on donne les valeurs a ce tableau ( dans l'ordre , dabord lati)
+vraiLocalisation.push(data[result]['longi']);
+
+console.log(vraiLocalisation)
+
+let btnguess = document.getElementById('btnguess');
 
 document.getElementById('btnguess').addEventListener('click', () => {      // lorsque l'utilisateur clique sur le boutton guess
+    document.getElementById('btnguess').style.visibility='hidden'
     if (!userMarker) {          // si le marqueur de l'utilisateur n'existe pas...
         alert('Veuillez placer un marqueur (map 1) avant de deviner !');
         return;
