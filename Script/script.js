@@ -1,4 +1,4 @@
-let map = L.map('map').setView([51.505, -0.09], 13);
+let map = L.map('map').setView([51.505, -0.09], 5);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -88,7 +88,7 @@ map.on('click', onClick);
 
 // ajout de la map numero 2 ( qui servira pour la correction après le guess)
 
-let map2 = L.map('map2').setView([51.505, -0.09], 13);
+let map2 = L.map('map2').setView([51.505, -0.09], 5);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -120,12 +120,13 @@ document.getElementById('btnguess').addEventListener('click', () => {      // lo
 
 
     let distance = map.distance(userMarker._latlng, vraiLocalisation)    // creation de la variable distance pour calculer la distance
+    let distancee=distance.toString().slice(0,8);
 
     dist = document.getElementById('distance')
-    dist.innerText = 'tu es à' + distance + 'mètres';
+    dist.innerText = 'tu es à' + distancee + 'km';
 
 
-    polyline.bindPopup("tu es à" + distance + "mètres").openPopup();     // fait apparaitre un popup sur la ligne rouge pour annoncer la distance
+    polyline.bindPopup("tu es à" + distancee + "mètres").openPopup();     // fait apparaitre un popup sur la ligne rouge pour annoncer la distance
 }
 )
 
