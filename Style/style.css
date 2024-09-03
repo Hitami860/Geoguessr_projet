@@ -39,6 +39,12 @@ body{
     justify-content: center;
 }
 
+.flexbtn{
+    display: flex;
+    justify-content: center;
+    padding-top: 3%;
+}
+
 /* map 2 pour la correction après le guess */
 
 #map2 { 
@@ -50,4 +56,29 @@ body{
     display: flex;
     flex:center;
     justify-content: center;
+}
+
+
+
+
+
+
+h3 {
+    color: #d89c51;
+    padding-left: 30%;
+}
+
+#map2text{
+    color: #d89c51;
+    padding-left: 45%;
+}
+
+.scoretext{
+    color: #d89c51;
+    padding-left: 80%;
+    padding-bottom: 3%;
+}
+
+.questtext{
+    color: #d89c51;
 }
