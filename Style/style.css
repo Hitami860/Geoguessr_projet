@@ -73,7 +73,7 @@ h3 {
     padding-left: 45%;
 }
 
-.scoretext{
+#scoretext{
     color: #d89c51;
     padding-left: 80%;
     padding-bottom: 3%;
@@ -81,4 +81,14 @@ h3 {
 
 .questtext{
     color: #d89c51;
+}
+
+#delais{
+    color: #d89c51;
+
+}
+
+#start{
+    color: black;
+
 }
