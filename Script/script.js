@@ -1,10 +1,11 @@
 let map = L.map('map').setView([51.505, -0.09], 5);
 
-    let score = null; // variable score
-    let btnstart = document.getElementById('start');
-    
-    
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+let score = null; // variable score
+let btnstart = document.getElementById('start');
+let btnnew = document.getElementById('new');
+
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     noWrap: true
@@ -70,9 +71,9 @@ let data = [
 function refreshElement() {
 
     result = data[getRandomItem()];
-    imagee.src=result.image[0];
+    imagee.src = result.image[0];
 
-    vraiLocalisation = [result['lati'], result['longi']] 
+    vraiLocalisation = [result['lati'], result['longi']]
 
     map2.remove();
 
@@ -140,10 +141,12 @@ document.getElementById('btnguess').style.visibility = 'hidden' // le boutton gu
 image.appendChild(imagee).style.visibility = 'hidden'
 document.getElementById('continue').style.visibility = 'hidden';
 
+document.getElementById('new').style.visibility = 'hidden';
+
 btnstart.addEventListener('click', () => {
-   document.getElementById('start').style.visibility = 'hidden';
-   document.getElementById('btnguess').style.visibility = 'visible';
-   image.appendChild(imagee).style.visibility = 'visible'
+    document.getElementById('start').style.visibility = 'hidden';
+    document.getElementById('btnguess').style.visibility = 'visible';
+    image.appendChild(imagee).style.visibility = 'visible'
 
 
 });
@@ -170,7 +173,7 @@ document.getElementById('btnguess').addEventListener('click', () => {      // lo
 
 
     let distance = map.distance(userMarker._latlng, vraiLocalisation)    // creation de la variable distance pour calculer la distance
-    let distancee = Math.round(distance)/1000;
+    let distancee = Math.round(distance) / 1000;
 
 
     dist = document.getElementById('distance')
@@ -187,23 +190,23 @@ document.getElementById('btnguess').addEventListener('click', () => {      // lo
     function assignScore(distancee) {
 
 
-    if ( distancee < 100000) { 
-        score = 100;
-    } else if (distancee < 500000) {
-        score = 75;
-    } else if (distancee < 1000000) {
-        score = 50;
-    } else if (distancee < 1500000) {
-        score = 25;
-    } else {
-        score = 0;
+        if (distancee < 100000) {
+            score = score + 100;
+        } else if (distancee < 500000) {
+            score = score + 75;
+        } else if (distancee < 1000000) {
+            score = score + 50;
+        } else if (distancee < 1500000) {
+            score = score + 25;
+        } else {
+            score = score + 0;
+        }
     }
-}
 
-assignScore(distance)
-scoree.innerText = 'score:' + score
+    assignScore(distance)
+    scoree.innerText = 'score:' + score
 
-polyline.bindPopup("tu es à " + distancee + " km du point de départ, tu gagnes " + score + " points").openPopup(); // fait apparaitre un popup sur la ligne rouge pour annoncer la distance
+    polyline.bindPopup("tu es à " + distancee + " km du point de départ, tu as " + score + " points").openPopup(); // fait apparaitre un popup sur la ligne rouge pour annoncer la distance
 
 }
 )
@@ -219,10 +222,36 @@ document.getElementById('continue').addEventListener('click', () => {
         userMarker = null;
     }
 
-document.getElementById('btnguess').style.visibility = 'visible'
+    document.getElementById('btnguess').style.visibility = 'visible'
 
-refreshElement();
-    
+    refreshElement();
+
+    finGame();
+
 }
 )
 
+function finGame() {
+
+    if (score >= 300) {
+        alert('Bravo, tu as atteint le score de 300 points ! ')
+        document.getElementById('continue').style.visibility = 'hidden';
+        document.getElementById('btnguess').style.visibility = 'hidden';
+        document.getElementById('new').style.visibility = 'visible';
+
+    } else {
+
+        document.getElementById('continue').style.visibility = 'visible';
+        document.getElementById('new').style.visibility = 'hidden';
+    }
+
+
+
+}
+
+document.getElementById('new').addEventListener('click', () => {
+
+    document.location.reload();
+
+}
+)
