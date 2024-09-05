@@ -65,13 +65,35 @@ let data = [
 
 ]
 
-function getRandomItem(arr) {
+
+
+function refreshElement() {
+
+    result = data[getRandomItem()];
+    imagee.src=result.image[0];
+
+    vraiLocalisation = [result['lati'], result['longi']] 
+
+    map2.remove();
+
+    map2 = L.map('map2').setView([51.505, -0.09], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        noWrap: true
+    }).addTo(map2)
+
+}
+
+
+
+
+function getRandomItem() {
 
     return randomIndex = Math.floor(Math.random() * data.length);
 
 }
-let result = getRandomItem(data);
-console.log(result)
+let result = getRandomItem();
 
 let image = document.getElementById('paysage');
 let imagee = document.createElement('img');
@@ -110,14 +132,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     noWrap: true
 }).addTo(map2)
 
-let vraiLocalisation = []     // donne les valeurs de la vrai localisation ( on declare dabord un tableau vide)..
-vraiLocalisation.push(data[result]['lati']);  // on donne les valeurs a ce tableau ( dans l'ordre , dabord lati)
-vraiLocalisation.push(data[result]['longi']);
+let vraiLocalisation = [data[result]['lati'], data[result]['longi']]     // donne les valeurs de la vrai localisation ( on declare dabord un tableau vide)..
 
 console.log(vraiLocalisation)
 
 document.getElementById('btnguess').style.visibility = 'hidden' // le boutton guess caché si il clique pas sur commencer la partie
 image.appendChild(imagee).style.visibility = 'hidden'
+document.getElementById('continue').style.visibility = 'hidden';
 
 btnstart.addEventListener('click', () => {
    document.getElementById('start').style.visibility = 'hidden';
@@ -136,6 +157,8 @@ document.getElementById('btnguess').addEventListener('click', () => {      // lo
         alert('Veuillez placer un marqueur (map 1) avant de deviner !');
         return;
     }
+    document.getElementById('continue').style.visibility = 'visible';
+
     L.marker(userMarker._latlng, { color: 'red' }).addTo(map2);      // fait appaitre le marqueur de l'utilisateur sur la map 2
     L.marker(vraiLocalisation, { icon: redIcon }).addTo(map2);       // fait appaitre le marqueur de la vrai localisation sur la map 2
 
@@ -184,3 +207,22 @@ polyline.bindPopup("tu es à " + distancee + " km du point de départ, tu gagnes
 
 }
 )
+
+
+
+let btncontinue = document.getElementById('continue');
+
+document.getElementById('continue').addEventListener('click', () => {
+
+    if (userMarker) {
+        map.removeLayer(userMarker);
+        userMarker = null;
+    }
+
+document.getElementById('btnguess').style.visibility = 'visible'
+
+refreshElement();
+    
+}
+)
+
