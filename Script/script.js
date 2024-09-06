@@ -143,10 +143,37 @@ document.getElementById('continue').style.visibility = 'hidden';
 
 document.getElementById('new').style.visibility = 'hidden';
 
+
+
+function debutChrono() {
+
+        var countDownDate = new Date().getTime() + 31000;
+        var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("delais").innerText = 'Il te reste ' + seconds + " s ";
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("delais").innerText = "EXPIRED";
+            alert('Le temps est expriré  !');
+            document.getElementById('btnguess').style.visibility = 'hidden';
+
+        }
+
+    },);
+
+    console.log(debutChrono)
+
+}
+
 btnstart.addEventListener('click', () => {
     document.getElementById('start').style.visibility = 'hidden';
     document.getElementById('btnguess').style.visibility = 'visible';
     image.appendChild(imagee).style.visibility = 'visible'
+    debutChrono();
 
 
 });
@@ -177,7 +204,6 @@ document.getElementById('btnguess').addEventListener('click', () => {      // lo
 
 
     dist = document.getElementById('distance')
-    dist.innerText = 'tu es à' + distancee + 'km';
 
 
     let scrollDiv = document.getElementById("map2").offsetTop;  // fonction pour scroller automatiquement vers la carte lorsquon clique sur le boutton
@@ -230,6 +256,7 @@ document.getElementById('continue').addEventListener('click', () => {
 
 }
 )
+
 
 function finGame() {
 
